@@ -47,5 +47,8 @@ fn get_input<T: std::str::FromStr>(prompt: &str) -> T {
 }
 
 fn main() {
-    println!("Hello, world!");
+    let first_name: String = get_input("Enter the first name: ");
+    let last_name: String = get_input("Enter the last name: ");
+    let zip_code: String = get_input("Enter the ZIP code: ");
+    let employee_id: String = get_input("Enter an employee ID: ");
 }
