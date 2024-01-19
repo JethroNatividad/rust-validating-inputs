@@ -9,6 +9,13 @@
 // • The ZIP code must be a number.
 // Display appropriate error messages on incorrect data.
 
+fn validate_name(name: &str) -> Result<(), &str> {
+    if name.is_empty() {
+        return Err("The {} must be filled in.");
+    }
+    Ok(())
+}
+
 fn main() {
     println!("Hello, world!");
 }
