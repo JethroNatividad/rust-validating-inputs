@@ -27,6 +27,23 @@ fn validate_regex(text: &str, regex_pattern: &str, error_message: String) -> Res
     Ok(())
 }
 
+fn get_input<T: std::str::FromStr>(prompt: &str) -> T {
+    loop {
+        print!("{}", prompt);
+        io::stdout().flush().unwrap();
+
+        let mut input = String::new();
+        io::stdin()
+            .read_line(&mut input)
+            .expect("Failed to read input");
+
+        match input.trim().parse() {
+            Ok(value) => break value,
+            Err(_) => println!("Invalid input. Please try again."),
+        }
+    }
+}
+
 fn main() {
     println!("Hello, world!");
 }
