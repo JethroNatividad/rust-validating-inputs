@@ -1,4 +1,6 @@
 use regex::Regex;
+use std::io;
+use std::io::Write;
 
 // Write a program that prompts for a first name, last name,
 // employee ID, and ZIP code. Ensure that the input is valid
