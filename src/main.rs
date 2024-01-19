@@ -12,13 +12,18 @@ use regex::Regex;
 // Display appropriate error messages on incorrect data.
 
 fn validate_name(name: &str, field_name: &str) -> Result<(), String> {
-    if name.is_empty() {
+    if name.trim().is_empty() {
         return Err(format!("The {} must be filled in.", field_name));
     }
     Ok(())
 }
 
-fn validate_regex(text: &str, regex: &str, error_message: String) -> Result<(), String> {
+fn validate_regex(text: &str, regex_pattern: &str, error_message: String) -> Result<(), String> {
+    let re = Regex::new(regex_pattern).unwrap();
+    let Some(caps) = re.captures("Hello Murphy!") else {
+        println!("no match!");
+        return Err(error_message);
+    };
     Ok(())
 }
 
