@@ -1,3 +1,5 @@
+use regex::Regex;
+
 // Write a program that prompts for a first name, last name,
 // employee ID, and ZIP code. Ensure that the input is valid
 // according to these rules:
@@ -9,10 +11,14 @@
 // • The ZIP code must be a number.
 // Display appropriate error messages on incorrect data.
 
-fn validate_name(name: &str) -> Result<(), &str> {
+fn validate_name(name: &str, field_name: &str) -> Result<(), String> {
     if name.is_empty() {
-        return Err("The {} must be filled in.");
+        return Err(format!("The {} must be filled in.", field_name));
     }
+    Ok(())
+}
+
+fn validate_regex(text: &str, regex: &str, error_message: String) -> Result<(), String> {
     Ok(())
 }
 
