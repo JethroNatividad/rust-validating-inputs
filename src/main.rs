@@ -13,18 +13,17 @@ use std::io::Write;
 // • The ZIP code must be a number.
 // Display appropriate error messages on incorrect data.
 
-fn validate_name(name: &str, field_name: &str) -> Result<(), String> {
+fn validate_empty(name: &str, field_name: &str) -> Result<(), String> {
     if name.trim().is_empty() {
         return Err(format!("The {} must be filled in.", field_name));
     }
     Ok(())
 }
 
-fn validate_regex(text: &str, regex_pattern: &str, error_message: String) -> Result<(), String> {
+fn validate_regex(text: &String, regex_pattern: &str) -> Result<(), ()> {
     let re: Regex = Regex::new(regex_pattern).unwrap();
-    let Some(_caps) = re.captures(text) else {
-        println!("no match!");
-        return Err(error_message);
+    let Some(_caps) = re.captures(&text) else {
+        return Err(());
     };
     Ok(())
 }
@@ -51,4 +50,28 @@ fn main() {
     let last_name: String = get_input("Enter the last name: ");
     let zip_code: String = get_input("Enter the ZIP code: ");
     let employee_id: String = get_input("Enter an employee ID: ");
+
+    let regex_not_empty: &str = r"!^\\s*$";
+    let regex_min_2: &str = r"^.{2,}$";
+    let regex_employee_id: &str = r"^[A-Z]{2}-\d{4}$";
+    let regex_zip_code: &str = r"^\d+$";
+
+    if let Err(_) = validate_regex(&first_name, regex_not_empty) {
+        println!("The first name must be filled in.");
+    }
+    if let Err(_) = validate_regex(&last_name, regex_not_empty) {
+        println!("The last name must be filled in.");
+    }
+    if let Err(_) = validate_regex(&first_name, regex_min_2) {
+        println!("The first name must be at least two characters long.");
+    }
+    if let Err(_) = validate_regex(&last_name, regex_min_2) {
+        println!("The last name must be at least two characters long.");
+    }
+    if let Err(_) = validate_regex(&employee_id, regex_employee_id) {
+        println!("{} is not a valid ID.", employee_id);
+    }
+    if let Err(_) = validate_regex(&zip_code, regex_zip_code) {
+        println!("The ZIP code must be numeric.");
+    }
 }
