@@ -13,13 +13,6 @@ use std::io::Write;
 // • The ZIP code must be a number.
 // Display appropriate error messages on incorrect data.
 
-fn validate_empty(name: &str, field_name: &str) -> Result<(), String> {
-    if name.trim().is_empty() {
-        return Err(format!("The {} must be filled in.", field_name));
-    }
-    Ok(())
-}
-
 fn validate_regex(text: &String, regex_pattern: &str) -> Result<(), ()> {
     let re: Regex = Regex::new(regex_pattern).unwrap();
     let Some(_caps) = re.captures(&text) else {
